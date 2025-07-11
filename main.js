@@ -20,10 +20,13 @@ const path = require("path");
     await page.goto("https://dab.yeet.su/");
 
     const song = songList[index];
+    await page.waitForTimeout(2000);
 
     await page.getByRole("textbox", { name: "Search query" }).click();
     await page.getByRole("textbox", { name: "Search query" }).fill(song);
+    await page.waitForTimeout(2000);
     await page.getByRole("button", { name: "Search", exact: true }).click();
+    await page.waitForTimeout(2000);
     await page
       .locator(".flex.items-center.gap-2 > button:nth-child(4)")
       .first()
