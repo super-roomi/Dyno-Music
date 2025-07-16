@@ -1,10 +1,23 @@
 const { chromium } = require("playwright");
 const prompt = require("prompt-sync")();
 const path = require("path");
+const cliProgress = require("cli-progress");
+const axios = require("axios");
+const fs = require("fs");
+const mainLink = "https://dab.yeet.su/";
+const fallbackLink = "https://us.qobuz.squid.wtf/";
+const metadataLink = "https://api.deezer.com/search?q=";
 
 (async () => {
+  console.log(`
+   _____  ___  ______ 
+  / _ \\ \\/ / |/ / __ \\
+ / // /\\  /    / /_/ /
+/____/ /_/_/|_/\\____/ 
+`);
+
   const browser = await chromium.launch({
-    headless: false,
+    headless: true,
   });
 
   const context = await browser.newContext();
@@ -13,15 +26,29 @@ const path = require("path");
 
   const songsPrompt = prompt("please input your comma-separated songs:");
 
-  const songList = songsPrompt.split(",").map((s) => s.trim()); // trim whitespace
+  const songList = songsPrompt.split(",").map((s) => s.trim());
+
+  const bar1 = new cliProgress.SingleBar(
+    {},
+    cliProgress.Presets.shades_classic
+  );
+
+  bar1.start(songList.length, 0);
 
   for (let index = 0; index < songList.length; index++) {
-    const context = await browser.newContext();
-    await page.goto("https://dab.yeet.su/");
+    await page.goto(mainLink);
 
     const song = songList[index];
     await page.waitForTimeout(2000);
 
+    const songNameAndArtist = song.split("-").map((s) => s.trim());
+    const songArtist = songNameAndArtist[0];
+    const songName = songNameAndArtist[1];
+
+    console.log(songName);
+    console.log(songArtist);
+
+    console.log(" 🔍 Searching for: " + songName + " by " + songArtist);
     await page.getByRole("textbox", { name: "Search query" }).click();
     await page.getByRole("textbox", { name: "Search query" }).fill(song);
     await page.waitForTimeout(2000);
@@ -38,67 +65,41 @@ const path = require("path");
         .first()
         .click(),
     ]);
+
+    console.log(" Downloading: " + songList[index]);
     await download.saveAs(`./songs/${download.suggestedFilename()}`);
+
+    //Search for the metadata of the dong
+    console.log("🧷 Tagging with the relevant metadata");
+    const searchSong = async (song, artist) => {
+      let songMetaData;
+      let cover_art_url;
+      axios
+        .get(
+          metadataLink +
+            "artist:" +
+            '"' +
+            artist +
+            '"' +
+            " " +
+            "track:" +
+            '"' +
+            song +
+            '"'
+        )
+        .then((response) => {
+          songMetaData = response.data.data;
+          cover_art_url = songMetaData[0].album.cover_big;
+        })
+        .catch((error) => {
+          console.error("An error occured fetching metadata: " + error);
+        });
+    };
+    await searchSong(songName, songArtist);
+
+    bar1.increment(1);
   }
+  console.log(" finished all downloads!");
   await context.close();
   await browser.close();
 })();
-
-// import { test, expect } from "@playwright/test";
-
-// test("test", async ({ page }) => {
-//   let songList = [];
-
-//   console.log(
-//     "Welcome to Dyno! Type the names of the songs you want to download, separate them by comma please!"
-//   );
-
-//   const songs = prompt("fuck");
-//   console.log(songs);
-//   await page.goto("https://dab.yeet.su/");
-
-//   for (let index = 0; index < array.length; index++) {
-//     const element = array[index];
-//   }
-
-//   await page.getByRole("textbox", { name: "Search query" }).click();
-//   await page.getByRole("textbox", { name: "Search query" }).click();
-//   await page.getByRole("textbox", { name: "Search query" }).fill("Hello");
-//   await page.getByRole("button", { name: "Search", exact: true }).click();
-//   await page
-//     .getByRole("heading", { name: "You Can't Hurry Love (2016" })
-//     .click();
-//   await page
-//     .getByRole("heading", { name: "You Can't Hurry Love (2016" })
-//     .click();
-//   await page
-//     .getByRole("heading", { name: "You Can't Hurry Love (2016" })
-//     .dblclick();
-//   await page
-//     .getByRole("heading", { name: "You Can't Hurry Love (2016" })
-//     .click();
-//   await page.locator(".h-20").first().click();
-//   await page.locator(".flex.gap-4").first().click();
-//   await page
-//     .locator("div:nth-child(2) > .p-4 > .flex.gap-4 > .flex-1 > div")
-//     .first()
-//     .click();
-//   await page
-//     .locator(
-//       "div:nth-child(2) > .p-4 > .flex.gap-4 > .flex-1 > div > .font-medium.text-white\\/90"
-//     )
-//     .click();
-//   await page.getByRole("img", { name: "25" }).first().click();
-//   await page
-//     .locator("div:nth-child(2) > .p-4 > .flex.gap-4 > .relative > .inline-flex")
-//     .click();
-//   await page.getByLabel("Play", { exact: true }).click();
-//   const downloadPromise = page.waitForEvent("download");
-//   await page
-//     .locator(
-//       ".rounded-lg.border.text-card-foreground.bg-zinc-800\\/40.backdrop-blur-md.transition-all.duration-300.hover\\:bg-zinc-800\\/60.border-emerald-500\\/70 > .p-4 > .flex.gap-4 > .flex-1 > div:nth-child(5) > button:nth-child(4)"
-//     )
-//     .click();
-//   const download = await downloadPromise;
-//   await page.getByRole("button", { name: "Pause" }).click();
-// });
