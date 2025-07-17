@@ -45,9 +45,6 @@ const metadataLink = "https://api.deezer.com/search?q=";
     const songArtist = songNameAndArtist[0];
     const songName = songNameAndArtist[1];
 
-    console.log(songName);
-    console.log(songArtist);
-
     console.log(" 🔍 Searching for: " + songName + " by " + songArtist);
     await page.getByRole("textbox", { name: "Search query" }).click();
     await page.getByRole("textbox", { name: "Search query" }).fill(song);
@@ -71,30 +68,6 @@ const metadataLink = "https://api.deezer.com/search?q=";
 
     //Search for the metadata of the dong
     console.log("🧷 Tagging with the relevant metadata");
-    const searchSong = async (song, artist) => {
-      let songMetaData;
-      let cover_art_url;
-      axios
-        .get(
-          metadataLink +
-            "artist:" +
-            '"' +
-            artist +
-            '"' +
-            " " +
-            "track:" +
-            '"' +
-            song +
-            '"'
-        )
-        .then((response) => {
-          songMetaData = response.data.data;
-          cover_art_url = songMetaData[0].album.cover_big;
-        })
-        .catch((error) => {
-          console.error("An error occured fetching metadata: " + error);
-        });
-    };
     await searchSong(songName, songArtist);
 
     bar1.increment(1);
