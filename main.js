@@ -1,12 +1,11 @@
-const { chromium } = require("playwright");
-const prompt = require("prompt-sync")();
-const path = require("path");
-const cliProgress = require("cli-progress");
-const axios = require("axios");
-const fs = require("fs");
+import searchSong from "./metadataHandler.js";
+import { chromium } from "playwright";
+import promptSync from "prompt-sync";
+import cliProgress from "cli-progress";
+
+const prompt = promptSync();
 const mainLink = "https://dab.yeet.su/";
 const fallbackLink = "https://us.qobuz.squid.wtf/";
-const metadataLink = "https://api.deezer.com/search?q=";
 
 (async () => {
   console.log(`
@@ -67,7 +66,7 @@ const metadataLink = "https://api.deezer.com/search?q=";
     await download.saveAs(`./songs/${download.suggestedFilename()}`);
 
     //Search for the metadata of the dong
-    console.log("🧷 Tagging with the relevant metadata");
+    console.log("🔍 Searching and downloading relevant metadata");
     await searchSong(songName, songArtist);
 
     bar1.increment(1);
