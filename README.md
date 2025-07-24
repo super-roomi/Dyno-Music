@@ -19,7 +19,7 @@ A terminal-based playwright app that allows you to batch download music from dab
 Clone the project
 
 ```bash
-  git clone (https://github.com/super-roomi/Dyno-Music.git]
+  git clone https://github.com/super-roomi/Dyno-Music.git
 ```
 
 Go to the project directory
