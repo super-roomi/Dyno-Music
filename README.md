@@ -34,6 +34,11 @@ Install dependencies
   npm install
 ```
 
+Install a browser
+```bash
+npx playwright install
+```
+
 Start the server
 
 ```bash
