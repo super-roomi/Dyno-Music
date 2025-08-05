@@ -8,7 +8,7 @@ A terminal-based playwright app that allows you to batch download music from dab
 
 ## Tech Stack
 
-**Scraping**: playwright, JavaScript
+**Scraping**: playwright, JavaScript, Node.js
 
 ## License
 
@@ -38,6 +38,10 @@ Start the server
 
 ```bash
   node ./main.js
+```
+Type out your song in the form of a list (song dash artist format)
+```bash
+  portland-drake
 ```
 
 ## Authors
