@@ -37,7 +37,7 @@ Install dependencies
 
 Install a browser
 ```bash
-npx playwright install
+  npx playwright install
 ```
 
 Start the server
