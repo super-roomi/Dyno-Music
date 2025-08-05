@@ -41,7 +41,7 @@ Start the server
 ```
 Type out your song in the form of a list (song dash artist format)
 ```bash
-  portland-drake
+  portland-drake, no one noticed-the marias, etc...
 ```
 
 ## Authors
