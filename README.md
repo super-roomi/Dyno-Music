@@ -4,7 +4,8 @@ A terminal-based playwright app that allows you to batch download music from dab
 
 ## Features
 
-- Download music in batches, with a provided list of comma-separated songs
+- Download tracks in batches, with a provided list of comma-separated songs
+- Download albums in batches
 
 ## Tech Stack
 
