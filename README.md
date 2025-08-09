@@ -5,15 +5,14 @@ A terminal-based playwright app that allows you to batch download music from dab
 ## Features
 
 - Download tracks in batches, with a provided list of comma-separated songs
-- Download albums in batches
+- Download albums in batches, with a provided list of comma-separated albums
 
 ## Tech Stack
 
 **Scraping**: playwright, JavaScript, Node.js
 
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+## Pre-requisites
+**Node.js Runtime**: https://nodejs.org/en
 
 ## Run Locally
 
