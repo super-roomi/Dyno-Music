@@ -11,6 +11,14 @@ T-Rex eating its way through a bar.
 /____/ /_/_/|_/\____/   music downloader
 ```
 
+## Heads up
+
+This script can make mistakes when downloading music: sometimes the scraped
+site doesn't return the exact song you wanted — it may be unavailable, or a
+different track with a matching name comes back instead. Testing with 100 songs
+from my library gave ~11 incorrect downloads. Your mileage will vary. Work will
+continue to mitigate this, but expect the occasional wrong song.
+
 ## Features
 
 - **Playlist input** — point it at a `.csv` or `.m3u`/`.m3u8` file instead of

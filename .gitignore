@@ -1,4 +1,4 @@
 songs/
-node_modules
+node_modules/
 .dyno-done.json
-.DS_Store/
+.DS_Store
