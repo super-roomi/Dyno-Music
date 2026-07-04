@@ -1,15 +1,7 @@
 # Dyno Music
 
 A terminal music downloader. Feed it a **CSV or M3U playlist** and it downloads
-each track, embeds full metadata **and cover art**, and shows progress as a
-T-Rex eating its way through a bar.
-
-```
-   _____  ___  ______
-  / _ \ \/ / |/ / __ \
- / // /\  /    / /_/ /
-/____/ /_/_/|_/\____/   music downloader
-```
+each track, embeds full metadata **and cover art**.
 
 ## Heads up
 
