@@ -1,0 +1,4 @@
+songs/
+node_modules/
+.dyno-done.json/
+.DS_Store/
