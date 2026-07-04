@@ -1,15 +1,17 @@
 # Dyno Music
 
-A terminal-based playwright app that allows you to batch download music from dab.yeet.su
+A terminal-based playwright app that allows you to batch download music using a .csv or .m3u file.
 
 ## Features
 
-- Download tracks in batches, with a provided list of comma-separated songs
-- Download albums in batches, with a provided list of comma-separated albums
+- Download tracks from a .csv file.
+- Download track from a .m3u playlist file.
 
 ## Tech Stack
 
 **Scraping**: playwright, JavaScript, Node.js
+**Track Tagging**: ffmpeg
+
 
 ## Pre-requisites
 **Node.js Runtime**: https://nodejs.org/en
@@ -44,9 +46,9 @@ Start the server
 ```bash
   node ./main.js
 ```
-Type out your song in the form of a list (song dash artist format)
+
 ```bash
-  portland-drake, no one noticed-the marias, etc...
+  node main.js path/to/ur/csv/m3u
 ```
 
 ## Authors
