@@ -2,6 +2,10 @@
 
 A terminal-based playwright app that allows you to batch download music using a .csv or .m3u file.
 
+# Heads Up
+
+This script can make mistakes when downloading music, in the sense that the website being scraped just doesn't give you the song you wanted outright, due to it being unavailable or just the names matching. After testing it with 100 songs from my library, I had about 11 incorrect downloads. Your milage will vary. Work will be done to mitigate this as much as possible, but yeah, expect wrong songs to appear as u download ur music.
+
 ## Features
 
 - Download tracks from a .csv file.
@@ -41,12 +45,7 @@ Install a browser
   npx playwright install
 ```
 
-Start the server
-
-```bash
-  node ./main.js
-```
-
+Select your .csv/.m3u file and start downloading
 ```bash
   node main.js path/to/ur/csv/m3u
 ```
